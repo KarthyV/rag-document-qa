@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from app.services.rag_service import answer_query
 
@@ -13,5 +13,8 @@ class ChatResponse(BaseModel):
 
 @router.post("/")
 async def search_query(request: ChatRequest) -> ChatResponse:
-  response = answer_query(request.query)
-  return ChatResponse(answer=response["answer"], sources=response["sources"])
+  try:
+    response = answer_query(request.query)
+    return ChatResponse(answer=response["answer"], sources=response["sources"])
+  except Exception as e:
+    raise HTTPException(status_code=500, detail=f"Query failed: {str(e)}")

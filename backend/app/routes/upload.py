@@ -8,8 +8,8 @@ router = APIRouter()
 
 @router.post("/")
 async def upload_pdf(file: UploadFile = File(...)):
+    temp_file_path = None
     try:
-
         with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
             content = await file.read()
             temp_file.write(content)
@@ -28,6 +28,9 @@ async def upload_pdf(file: UploadFile = File(...)):
         }
     
     except Exception as e:
-        if 'temp_file_path' in locals():
-            os.remove(temp_file_path)
-        raise HTTPException(status_code=500, detail=str(e))
+        if temp_file_path and os.path.exists(temp_file_path):
+            try:
+                os.remove(temp_file_path)
+            except:
+                pass
+        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
