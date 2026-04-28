@@ -40,7 +40,7 @@ openai==2.32.0
 orjson==3.11.8
 ormsgpack==1.12.2
 packaging==26.1
-pinecone-client==6.0.0
+pinecone==6.0.0
 pinecone-plugin-interface==0.0.7
 propcache==0.4.1
 pydantic==2.13.3
@@ -67,6 +67,7 @@ typing_extensions==4.15.0
 urllib3==2.6.3
 uuid_utils==0.14.1
 uvicorn==0.45.0
+sentence-transformers==3.0.1
 xxhash==3.6.0
 yarl==1.23.0
 zstandard==0.25.0
