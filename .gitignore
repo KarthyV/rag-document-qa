@@ -1,0 +1,11 @@
+# Root gitignore
+.DS_Store
+.vscode/
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# Keep launch.json for debugging setup
+!.vscode/launch.json
